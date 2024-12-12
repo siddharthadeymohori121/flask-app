@@ -5,14 +5,25 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Git clone step
-                git 'https://github.com/yourusername/yourrepository.git'  // Your repo URL
+                git 'https://github.com/siddharthadeymohori121/flask-app.git'  // Your repo URL
+            }
+        }
+
+        stage('Check Python & Pip') {
+            steps {
+                // Verify Python and pip versions
+                sh 'python --version'
+                sh 'pip --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                // Install Python dependencies
-                sh 'pip install -r requirements.txt'
+                // Upgrade pip to avoid issues with older pip versions
+                sh 'python -m pip install --upgrade pip'
+
+                // Install dependencies directly from requirements.txt
+                sh 'pip install -r requirements.txt || { echo "Failed to install dependencies"; exit 1; }'
             }
         }
 
@@ -28,22 +39,22 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                // Run Selenium tests using pytest
+                // Run Selenium tests using pytest (directly)
                 sh 'pytest tests/test_flask_app.py'
             }
         }
+    }
 
-        post {
-            always {
-                // Always execute after the tests run
-                echo "Tests completed"
-            }
-            success {
-                echo "Tests passed successfully!"
-            }
-            failure {
-                echo "Tests failed. Please check the logs."
-            }
+    post {
+        always {
+            // Always execute after the tests run
+            echo "Tests completed"
+        }
+        success {
+            echo "Tests passed successfully!"
+        }
+        failure {
+            echo "Tests failed. Please check the logs."
         }
     }
 }
