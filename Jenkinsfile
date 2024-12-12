@@ -11,11 +11,8 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Upgrade pip to avoid issues with older pip versions
-                sh 'python -m pip install --upgrade pip'
-
-                // Install dependencies directly from requirements.txt
-                sh 'pip install -r requirements.txt || { echo "Failed to install dependencies"; exit 1; }'
+                // Install Python dependencies
+                sh 'pip install -r requirements.txt'
             }
         }
 
@@ -31,23 +28,22 @@ pipeline {
 
         stage('Run Selenium Tests') {
             steps {
-                // Run Selenium tests using pytest (directly)
+                // Run Selenium tests using pytest
                 sh 'pytest tests/test_flask_app.py'
             }
         }
     }
 
-        post {
-            always {
-                // Always execute after the tests run
-                echo "Tests completed"
-            }
-            success {
-                echo "Tests passed successfully!"
-            }
-            failure {
-                echo "Tests failed. Please check the logs."
-            }
+    post {
+        always {
+            // Always execute after the tests run
+            echo "Tests completed"
+        }
+        success {
+            echo "Tests passed successfully!"
+        }
+        failure {
+            echo "Tests failed. Please check the logs."
         }
     }
 }
