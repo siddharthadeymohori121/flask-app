@@ -3,4 +3,3 @@ pytest==7.4.0         # Testing framework
 selenium==4.7.2       # Selenium WebDriver for browser automation
 pytest-selenium==1.1.0  # Integration of pytest with Selenium (optional, for ease)
 flask-wtf==1.0.1      # (Optional) Flask extension for handling forms, if you use them in your app
-gunicorn==20.1.0      # (Optional) WSGI server for production (if you use it)

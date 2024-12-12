@@ -5,15 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Git clone step
-                git 'https://github.com/siddharthadeymohori121/flask-app.git'  // Your repo URL
-            }
-        }
-
-        stage('Check Python & Pip') {
-            steps {
-                // Verify Python and pip versions
-                sh 'python --version'
-                sh 'pip --version'
+                git 'https://github.com/yourusername/yourrepository.git'  // Your repo URL
             }
         }
 
@@ -45,16 +37,17 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Always execute after the tests run
-            echo "Tests completed"
-        }
-        success {
-            echo "Tests passed successfully!"
-        }
-        failure {
-            echo "Tests failed. Please check the logs."
+        post {
+            always {
+                // Always execute after the tests run
+                echo "Tests completed"
+            }
+            success {
+                echo "Tests passed successfully!"
+            }
+            failure {
+                echo "Tests failed. Please check the logs."
+            }
         }
     }
 }
