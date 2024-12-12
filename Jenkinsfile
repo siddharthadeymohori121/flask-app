@@ -12,14 +12,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install Python dependencies
-                sh 'pip install -r requirements.txt'
+                bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Start Flask App') {
             steps {
                 // Start the Flask app in the background
-                sh 'python app/lockedRESTs.py &'
+                bat 'python app/lockedRESTs.py &'
                 
                 // Wait for the Flask app to fully start
                 sleep time: 5, unit: 'SECONDS'
@@ -29,9 +29,11 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 // Run Selenium tests using pytest
-                sh 'pytest tests/test_flask_app.py'
+                bat 'pytest tests/test_flask_app.py'
             }
         }
+		
+		
     }
 
     post {
