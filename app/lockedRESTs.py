@@ -106,7 +106,7 @@ if __name__ == "__main__":
     # CherryPy WSGI server configuration
     cherrypy.config.update({
         "server.socket_host": "127.0.0.1",  # Listen on all interfaces
-        "server.socket_port": 8080        # Port for the app
+        "server.socket_port": 8081        # Port for the app
     })
     
     # Mount the Flask app
