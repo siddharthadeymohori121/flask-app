@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Git clone step
-                git 'https://github.com/yourusername/yourrepository.git'  // Your repo URL
+                git 'https://github.com/siddharthadeymohori121/flask-app.git'  // Your repo URL
             }
         }
 
@@ -32,18 +32,18 @@ pipeline {
                 sh 'pytest tests/test_flask_app.py'
             }
         }
+    }
 
-        post {
-            always {
-                // Always execute after the tests run
-                echo "Tests completed"
-            }
-            success {
-                echo "Tests passed successfully!"
-            }
-            failure {
-                echo "Tests failed. Please check the logs."
-            }
+    post {
+        always {
+            // Always execute after the tests run
+            echo "Tests completed"
+        }
+        success {
+            echo "Tests passed successfully!"
+        }
+        failure {
+            echo "Tests failed. Please check the logs."
         }
     }
 }
